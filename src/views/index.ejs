@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <%- include('partials/head.ejs') %>
+  <body>
+    <div class="container">
+
+      <h1>📝 <%= __('app.title') %></h1>
+
+      <div style="text-align:right">
+        <a href="/lang/fr">🇫🇷 Français</a> | <a href="/lang/en">🇬🇧 English</a>
+      </div>
+      <br />
+
+      <form action="/new" method="POST">
+        <input type="text" name="title" placeholder="<%= __('app.form.title') %>" required />
+        <textarea name="content" placeholder="<%= __('app.form.content') %>" rows="5"></textarea>
+        <button type="submit"><%= __('app.add_note') %></button>
+      </form>
+
+      <% if (notes.length === 0) { %>
+        <p><%= __('app.no_notes') %></p>
+      <% } %>
+
+      <% notes.forEach(note => { %>
+        <div class="note">
+          <h3><a href="/edit/<%= note.id %>"><%= note.title %></a></h3>
+          <p><%= note.content.slice(0, 100) %>...</p>
+        </div>
+      <% }) %>
+
+    </div>
+  </body>
+</html>
+

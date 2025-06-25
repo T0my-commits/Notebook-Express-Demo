@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <%- include('partials/head.ejs') %>
+  <body>
+    <div class="container">
+
+      <a href="/"><%= __('app.back') %></a>
+
+      <form action="/edit/<%= note.id %>" method="POST" class="form-section">
+        <label for="title"><%= __('app.form.title') %> :</label>
+        <input type="text" id="title" name="title" value="<%= note.title %>" required />
+
+        <label for="content"><%= __('app.form.content') %> :</label>
+        <textarea id="content" name="content" rows="5"><%= note.content %></textarea>
+
+        <div class="action-buttons">
+          <button type="submit" class="btn-primary"><%= __('app.update') %></button>
+        </div>
+      </form>
+
+      <form action="/delete/<%= note.id %>" method="POST" onsubmit="return confirm('<%= __('app.confirm_delete') %>');" class="form-section">
+        <div class="action-buttons">
+          <button type="submit" class="btn-danger"><%= __('app.delete') %></button>
+        </div>
+      </form>
+
+    </div>
+  </body>
+</html>
+

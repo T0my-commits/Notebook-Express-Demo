@@ -1,0 +1,34 @@
+services:
+  note-app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/usr/src/app/data
+      - ./src:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules
+    working_dir: /usr/src/app
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=note_user
+      - DB_PASSWORD=note_pass
+      - DB_NAME=note_db
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: note_db
+      POSTGRES_USER: note_user
+      POSTGRES_PASSWORD: note_pass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+
