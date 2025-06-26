@@ -4,7 +4,7 @@ const app = require('../src/app');
 const { Note, sequelize } = require('../src/models');
 
 beforeAll(async () => {
-  await sequelize.sync({ force: true }); // assure une base propre
+  await sequelize.sync({ force: true });
 });
 
 afterAll(async () => {
@@ -12,12 +12,15 @@ afterAll(async () => {
 });
 
 describe('Notebook endpoints', () => {
+
+  // Render / page
   it('Should render new note form', async () => {
     const res = await request(app).get('/');
     expect(res.statusCode).toBe(200);
     expect(res.text).toContain('<form');
   });
 
+  // Create a new note
   it('Should create a new note', async () => {
     const res = await request(app)
       .post('/new')
@@ -31,6 +34,7 @@ describe('Notebook endpoints', () => {
     expect(notes[0].title).toBe('Test Note');
   });
 
+  // Render edit page of a note
   it('Should render edit form for existing note', async () => {
     const note = await Note.create({ title: 'Edit me', content: '...' });
 
@@ -39,11 +43,7 @@ describe('Notebook endpoints', () => {
     expect(res.text).toContain(note.title);
   });
 
-  it('Should return 404 when editing non-existent note', async () => {
-    const res = await request(app).get('/edit/9999');
-    expect(res.statusCode).toBe(404);
-  });
-
+  // Edit a note
   it('Should update a note', async () => {
     const note = await Note.create({ title: 'Old', content: 'Old content' });
 
@@ -59,6 +59,13 @@ describe('Notebook endpoints', () => {
     expect(updated.content).toBe('New content');
   });
 
+  // Edit a non-existent note
+  it('Should return 404 when editing non-existent note', async () => {
+    const res = await request(app).get('/edit/9999');
+    expect(res.statusCode).toBe(404);
+  });
+
+  // Delete a note
   it('Should delete a note', async () => {
     const note = await Note.create({ title: 'Delete me', content: '...' });
 
@@ -73,6 +80,7 @@ describe('Notebook endpoints', () => {
     expect(deleted).toBeNull();
   });
 
+  // Delete a non-existent note
   it('Should return 404 when deleting non-existent note', async () => {
     const res = await request(app)
       .post('/delete/9999')
@@ -82,6 +90,7 @@ describe('Notebook endpoints', () => {
     expect(res.statusCode).toBe(404);
   });
 
+  // Change language
   it('Should change language via /lang/:locale', async () => {
     const res = await request(app).get('/lang/fr');
     expect(res.statusCode).toBe(302);
