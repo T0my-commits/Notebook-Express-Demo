@@ -54,7 +54,7 @@ Demonstration video:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/notebook_expressjs.git
+git clone https://github.com/T0my-commits/Notebook-Express-Demo
 cd notebook_expressjs
 ```
 
