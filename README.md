@@ -28,6 +28,7 @@ Demonstration video:
 | Database       | [PostgreSQL](https://www.postgresql.org/) |
 | Translations   | [i18n-node](https://github.com/mashpie/i18n-node) |
 | Containerization | [Docker Compose](https://docs.docker.com/compose/) |
+| Unit Testing   | [Jest](https://jestjs.io/), [Supertest](https://www.npmjs.com/package/supertest)      |
 
 ---
 
@@ -69,10 +70,18 @@ DB_HOST=localhost
 DB_PORT=5432
 ```
 
-### 3. Start the project with Docker Compose
+### 3. (Optionnal) Start unit tests
+
+If you want to run unit tests, do:
 
 ```bash
-docker-compose up --build
+docker compose -f docker-compose.test.yml up --build --abort-on-container-exit --remove-orphans
+```
+
+### 4. Start the project with Docker Compose
+
+```bash
+docker compose up --build --remove-orphans
 ```
 
 This will:
@@ -81,7 +90,7 @@ This will:
 - Start a PostgreSQL container
 - Bind app to `http://localhost:3000`
 
-> Your data will be persisted using Docker volumes.
+> Your data will be persisted using Docker volumes, except in the test environment, where the storage is temporary
 
 ---
 

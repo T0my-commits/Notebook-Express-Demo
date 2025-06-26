@@ -7,8 +7,9 @@ i18n.configure({
   directory: path.join(__dirname, 'locales'),
   objectNotation: true,
   cookie: 'lang',
-  autoReload: true,
+  autoReload: process.env.NODE_ENV !== 'test',
   updateFiles: false,
+  syncFiles: false,
 });
 
 module.exports = i18n;

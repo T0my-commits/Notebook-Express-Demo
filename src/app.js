@@ -4,7 +4,6 @@ const path = require('path');
 const notesRouter = require('./routes/notes');
 
 const app = express();
-const PORT = 3000;
 
 const i18n = require('./i18n');
 const cookieParser = require('cookie-parser');
@@ -28,7 +27,5 @@ app.use('/static', express.static(path.join(__dirname, '..', 'node_modules', 'pr
 // set routes
 app.use('/', notesRouter);
 
-app.listen(PORT, () => {
-  console.log(`Notebook Express Demo is running on http://localhost:${PORT}`);
-});
+module.exports = app;
 

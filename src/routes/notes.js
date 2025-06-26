@@ -46,7 +46,12 @@ router.post('/edit/:id', async (req, res) => {
 // Delete a note
 router.post('/delete/:id', async (req, res) => {
   try {
-    await Note.destroy({ where: { id: req.params.id } });
+    const deletedCount = await Note.destroy({ where: { id: req.params.id } });
+
+    if (deletedCount === 0) {
+      return res.status(404).send(req.__('error.not_found'));
+    }
+
     res.redirect('/');
   } catch (err) {
     res.status(500).send(req.__('error.delete'));
