@@ -40,8 +40,11 @@ Demonstration video:
 │   ├── app.js             # Main Express app
 │   ├── models/            # Sequelize models
 │   ├── views/             # EJS templates
+│   ├── routes/            # Express routes
 │   ├── locales/           # i18n translation files
 │   └── i18n.js            # i18n setup
+├── tests/
+│   └── notes.test.js      # unit tests for notes manipulations
 ├── Dockerfile             # Node.js container setup
 ├── docker-compose.yml     # App + PostgreSQL services
 └── package.json
