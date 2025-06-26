@@ -17,10 +17,10 @@ const Note = require('./note')(sequelize);
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log('Connexion PostgreSQL réussie.');
+    console.log('Connection establised with PostgreSQL database.');
     await sequelize.sync();
   } catch (error) {
-    console.error('Erreur connexion PostgreSQL :', error);
+    console.error('Error during connection to PostgreSQL database: ', error);
   }
 })();
 
