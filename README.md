@@ -121,7 +121,6 @@ The choice is stored in a cookie named `lang`.
 - Add user authentication
 - Add support for rich text
 - Implement search and tagging
-- Add unit and integration tests
 
 ---
 
